@@ -4,6 +4,7 @@ import 'features/inventory.dart';
 import 'features/report.dart';
 import 'features/scanner.dart';
 import 'features/utang.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class MainWrapper extends StatefulWidget {
   const MainWrapper({super.key});
@@ -19,8 +20,8 @@ class _MainWrapperState extends State<MainWrapper> {
     const HomePage(),
     const InventoryPage(),
     const ScannerPage(),
-    const ReportPage(),
     const UtangPage(),
+    const ReportPage(),
   ];
 
   @override
@@ -30,73 +31,98 @@ class _MainWrapperState extends State<MainWrapper> {
       bottomNavigationBar: SafeArea(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          height: 85, // Fixed height for the white bar
+          // padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.only(top: 4),
+          height: 90, // Fixed height for the white bar
           decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromARGB(255, 223, 223, 223),
+              width: 1,
+            ), // Invisible border to prevent overflow
             color: Colors.white,
-            borderRadius: BorderRadius.circular(35),
+            borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: const Color.fromARGB(71, 0, 0, 0),
                 blurRadius: 15,
-                offset: const Offset(0, 5),
+                offset: const Offset(0, 15),
               ),
             ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(35),
+            borderRadius: BorderRadius.circular(30),
             child: BottomNavigationBar(
-              iconSize: 30,
-              showSelectedLabels: true,
-              showUnselectedLabels: true,
+              iconSize: 28,
               type: BottomNavigationBarType.fixed,
               backgroundColor: Colors.white,
               currentIndex: _currentIndex,
               onTap: (index) => setState(() => _currentIndex = index),
               selectedItemColor: const Color(0xFF00A34D),
-              unselectedItemColor: Colors.grey,
+              // unselectedItemColor: Colors.grey,
+
               // Removes the jumpy text behavior
-              selectedFontSize: 0,
-              unselectedFontSize: 0,
+              selectedFontSize: 10,
+              unselectedFontSize: 10,
+
+              showSelectedLabels: true,
+              showUnselectedLabels: true,
+
+              selectedIconTheme: const IconThemeData(
+              ),
+
+              selectedLabelStyle: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+
+              unselectedLabelStyle: const TextStyle(
+                fontWeight: FontWeight
+                    .bold, // Use FontWeight.normal if only selected should be bold
+              ),
 
               items: [
-                const BottomNavigationBarItem(
-                  icon: Icon(Icons.home_outlined),
+                BottomNavigationBarItem(
+                  icon: Icon(LucideIcons.house),
                   label: 'Home',
                 ),
                 const BottomNavigationBarItem(
-                  icon: Icon(Icons.inventory_2_outlined),
+                  icon: Icon(LucideIcons.package),
                   label: 'Inventory',
                 ),
 
                 // --- THE CUSTOM MIDDLE ITEM ---
                 BottomNavigationBarItem(
-                  label: 'Scanner',
-                  icon: Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF00A34D), // The POS Green
-                      borderRadius: BorderRadius.circular(
-                        20,
-                      ), // Matches your image "squircle"
-                    ),
-                    child: const Icon(
-                      Icons.qr_code_scanner,
-                      color: Colors.white,
-                      size: 30,
+                  label: '',
+                  icon: Transform.translate(
+                    offset: const Offset(0, 0), // Lift it up
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      margin: const EdgeInsets.only(top: 0), // Lift it up
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF00A34D), // The POS Green
+                        borderRadius: BorderRadius.circular(
+                          20,
+                        ), // Matches your image "squircle"
+                      ),
+                      child: const Icon(
+                        LucideIcons.scanLine,
+                        color: Colors.white,
+                        size: 30,
+                      ),
                     ),
                   ),
                 ),
 
                 // ------------------------------
                 const BottomNavigationBarItem(
-                  icon: Icon(Icons.handshake_outlined),
+                  icon: Icon(LucideIcons.handCoins),
                   label: 'Utang',
                 ),
+
                 const BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart),
+                  icon: Icon(LucideIcons.chartColumn),
                   label: 'Report',
+                  tooltip: 'Report',
                 ),
               ],
             ),
