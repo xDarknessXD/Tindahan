@@ -6,8 +6,14 @@ class InventoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Inventory Page'),
+      backgroundColor: const Color.fromARGB(255, 149, 223, 149),
+      body: Column(
+        children: [
+          Container(
+
+            
+          ),
+        ],
       ),
     );
   }
